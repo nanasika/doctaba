@@ -29,8 +29,7 @@ CURRENT_USER=$(whoami)
 echo "Creating database and user..."
 
 # Create user if it doesn't exist
-psql postgres -c "DROP USER IF EXISTS $CURRENT_USER;" 2>/dev/null || true
-psql postgres -c "CREATE USER $CURRENT_USER WITH CREATEDB SUPERUSER;"
+psql postgres -c "CREATE USER $CURRENT_USER WITH CREATEDB SUPERUSER;" 2>/dev/null || echo "User $CURRENT_USER already exists, skipping user creation."
 
 # Create database
 psql postgres -c "DROP DATABASE IF EXISTS doctaba_dev;"
